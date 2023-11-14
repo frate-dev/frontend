@@ -1,20 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const initialState = {
     packages : [],
+    err: ""
 };
 export const packageSlice = createSlice({
     name:"packages",
     initialState,
     reducers:{
-        clearState:(state)=>state.packages = []
-
+        clearState:(state)=>state.packages = [],
+        // add searches
+        //add filters
+        //-- score
+        //-- above score
+        //-- below score
+        //-- find word in package
+        //-- search by stars
     },
     extraReducers:(builder)=>{
         builder
         .addCase(getAllPackages.fulfilled, (state, action)=>{
             state.packages = action.payload;
+        })
+        .addCase(getAllPackages.rejected,(state, action)=>{
+            state.packages = [];
+            state.err = action.payload;
         })
     }
 });
@@ -22,16 +32,20 @@ export const packageSlice = createSlice({
 export const getAllPackages = createAsyncThunk(
     "packages/getAllPackages",
     async(_,{rejectWithValue})=>{
-        const res = await axios.get("https://github.com/cmaker-dev/index/releases/latest/download/index.json",{
-            headers:{
-                "Content-Type":"application/json"
-            }
-        });
 
+
+    const res = fetch('../../public/index.json').then(response => {
+        return response.json();
+      }).then(data => {
+        return data;
+      })
+  
+        
         if(!res.ok){
-            rejectWithValue(await res.json());
+            rejectWithValue(await res);
         }
-        const data = await res.json();
+        const data = await res;
+       
         return data;
     }
 )

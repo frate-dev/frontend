@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPackages } from './store/packages';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const packages = useSelector((state)=>state.packages.packages);
+  useEffect(()=>{
+    dispatch(getAllPackages())
+  },[dispatch])
+
+
 
   return (
     <>

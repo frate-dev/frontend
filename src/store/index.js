@@ -3,7 +3,7 @@ import packageReducer from "./packages";
 
 const store = configureStore({
     reducer:{
-        pacakages:packageReducer,
+        packages:packageReducer,
     },
     middlware:(getDefaultMiddleware)=>
     getDefaultMiddleware()
