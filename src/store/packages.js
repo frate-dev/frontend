@@ -2,15 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     packages : [],
-    err: ""
+    err: "",
+    displayPackages: []
 };
 export const packageSlice = createSlice({
     name:"packages",
     initialState,
     reducers:{
         clearState:(state)=>state.packages = [],
-        filterForWord:(state)=>state.packages = state.packages.filter((i, word)=>i.name.includes(word)),
-        filterByStars:(state)=>state.packages = state.packages.filter((i,num)=>i.stars == num),
+        filterForWord:(state)=>state.displayPackages = state.packages.filter((i, word)=>i.name.includes(word)),
+        filterByStars:(state)=>state.displayPackages = state.packages.filter((i,num)=>i.stars == num),
         // add searches
         //add filters
         //-- score
