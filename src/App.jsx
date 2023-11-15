@@ -3,6 +3,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByStars, filterForWord, getAllPackages } from "./store/packages";
 import Header from "./components/header/index";
+import { Routes } from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,6 +17,11 @@ function App() {
   return (
     <>
       <Header></Header>
+      <Routes>
+        <Route path="/" />
+        <Route path="/packages" />
+        <Route path="/packages/:package" />
+      </Routes>
     </>
   );
 }
