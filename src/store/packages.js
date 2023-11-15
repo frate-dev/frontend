@@ -37,7 +37,7 @@ export const getAllPackages = createAsyncThunk(
     async(_,{rejectWithValue})=>{
 
 
-    const res = fetch('../../public/index.json').then(response => {
+    const res = fetch('../../index.json').then(response => {
         return response.json();
       }).then(data => {
         return data;
