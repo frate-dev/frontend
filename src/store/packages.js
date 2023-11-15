@@ -9,6 +9,8 @@ export const packageSlice = createSlice({
     initialState,
     reducers:{
         clearState:(state)=>state.packages = [],
+        filterForWord:(state)=>state.packages = state.packages.filter((i, word)=>i.name.includes(word)),
+        filterByStars:(state)=>state.packages = state.packages.filter((i,num)=>i.stars == num),
         // add searches
         //add filters
         //-- score
@@ -51,5 +53,5 @@ export const getAllPackages = createAsyncThunk(
 )
 
 
-export const {clearState} = packageSlice.actions;
+export const {clearState, filterForWord, filterByStars} = packageSlice.actions;
 export default packageSlice.reducer;
