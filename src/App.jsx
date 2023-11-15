@@ -18,9 +18,9 @@ function App() {
     <>
       <Header></Header>
       <Routes>
-        <Route path="/" />
+        {/* <Route path="/" />
         <Route path="/packages" />
-        <Route path="/packages/:package" />
+        <Route path="/packages/:package" /> */}
       </Routes>
     </>
   );
