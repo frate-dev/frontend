@@ -12,7 +12,7 @@ export default function Header() {
       <div className="flex">
         <img
           onClick={handleHome}
-          className="w-24 hover:animate-spin"
+          className="w-24 hover:animate-pulse"
           src="https://raw.githubusercontent.com/cmaker-dev/cmaker/6c64104821ca7f9e17583ecf30c7d2ac225a9b58/source/images/cmakerlogo.svg"
           alt="cmakeLogo"
         />
