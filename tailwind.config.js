@@ -10,10 +10,9 @@ export default {
     },
     colors: {
       blue: "#064F8C",
-      lightblue: "#7e5bef",
+      green: "#249847",
       pink: "#ff49db",
       orange: "#ff7849",
-      green: "#13ce66",
       yellow: "#ffc82c",
       "gray-dark": "#273444",
       gray: "#CDCDCE",

@@ -12,13 +12,13 @@ export default function Header() {
       <div className="flex">
         <img
           onClick={handleHome}
-          className="w-24 hover:animate-pulse"
+          className="w-24 hover:animate-pulse hover:cursor-pointer"
           src="https://raw.githubusercontent.com/cmaker-dev/cmaker/6c64104821ca7f9e17583ecf30c7d2ac225a9b58/source/images/cmakerlogo.svg"
           alt="cmakeLogo"
         />
         <h1 className="h-8 w-20 mt-8 ml-4 text-4xl text-gray">Index</h1>
       </div>
-      <button className="mr-20 bg-blue h-10 w-40 mt-8 rounded-md">
+      <button className="mr-20 bg-blue h-10 w-40 mt-8 rounded-md hover:bg-green">
         {" "}
         Submit Package
       </button>
