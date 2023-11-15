@@ -8,7 +8,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 
@@ -55,9 +55,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleHome = () => {
-    navigate("/");
+    // navigate("/");
   }
 
 
