@@ -12,13 +12,7 @@ export const packageSlice = createSlice({
         clearState:(state)=>state.packages = [],
         filterForWord:(state)=>state.displayPackages = state.packages.filter((i, word)=>i.name.includes(word)),
         filterByStars:(state)=>state.displayPackages = state.packages.filter((i,num)=>i.stars == num),
-        // add searches
-        //add filters
-        //-- score
-        //-- above score
-        //-- below score
-        //-- find word in package
-        //-- search by stars
+  
     },
     extraReducers:(builder)=>{
         builder
