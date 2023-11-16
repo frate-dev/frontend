@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchBar(){
     const [url, setUrl] = useState("");
+    const [score, setScore] = useState("");
+    const [name, setName] = useState("");
     const navigate = useNavigate();
 
     const handleSearch = e =>{
