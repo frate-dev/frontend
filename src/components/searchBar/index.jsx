@@ -6,7 +6,7 @@ export default function SearchBar(){
     const [url, setUrl] = useState("");
     const navigate = useNavigate();
 
-    const handelSearch = e =>{
+    const handleSearch = e =>{
         e.preventDefault()
         if(url != ""){
             navigate(`/packages${url}`)
@@ -14,6 +14,12 @@ export default function SearchBar(){
             navigate("/packages")
         }
     }
-    return (<>
-    </>)
+    return (
+    <form
+    onSubmit={handleSearch}
+    >
+        <input></input>
+        <button></button>
+        
+    </form>)
 }
