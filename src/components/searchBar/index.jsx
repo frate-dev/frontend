@@ -36,7 +36,7 @@ export default function SearchBar(){
     }
     return (
     <form
-    className="mt-12 w-1/3 flex h-10 rounded-lg bg-gray justify-between"
+    className="mt-12 w-1/2 flex h-10 rounded-lg bg-gray justify-between mr-24"
     onSubmit={handleSearch}
     >
         <input

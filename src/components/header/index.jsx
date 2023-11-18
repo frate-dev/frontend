@@ -19,8 +19,8 @@ export default function Header() {
         />
         
       </div>
-      <SearchBar></SearchBar>
-      <button className="mr-20 bg-blue h-10 w-40 mt-12 rounded-md hover:bg-green">
+      <SearchBar ></SearchBar>
+      <button className="mr-20 bg-blue h-10 w-40 mt-12 rounded-md hover:bg-green hidden md:flex justify-center items-center">
         {" "}
         Submit Package
       </button>
