@@ -17,6 +17,7 @@ export default function SearchBar(){
         }else{
             navigate("/packages")
         }
+        setUrl("")
     }
 
     // useEffect(()=>{

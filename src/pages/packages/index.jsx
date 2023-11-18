@@ -4,16 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
 import { filterForWord, getAllPackages } from "../../store/packages";
 import { useEffect } from "react";
+import { useState } from "react";
 
 export default function PackagesPage(){
+
     const parsed = queryString.parse(location.search);
     const dispatch = useDispatch();
-    useEffect(() => {
+
+    
+    const displayedItemsOne =useSelector((state)=>state.packages.displayPackages)
+
+    useEffect(()=>{
         dispatch(getAllPackages());
-      }, [dispatch, parsed.kwarg]);
-    
-    const displayedItems = useSelector((state)=>state.packages.packages).filter((i)=>i.name.includes(parsed.kwarg));
-    
+        dispatch(filterForWord(parsed.kwarg));
+    },[ dispatch, parsed.kwarg])
 
     
 //need to force a rerender if there is a change in params
@@ -21,7 +25,7 @@ export default function PackagesPage(){
     return (
         <div className="w-10/12 h-full mx-auto">
             {
-                displayedItems.length ? (<div>yes</div>):
+                displayedItemsOne.length ? (<div>yes</div>):
                 (<div className="mx-auto pt-24">
                     <h3 className="text-slate mx-auto w-fit pb-6 text-lg">No Packages Found...</h3>
                     <h3 className="text-slate mx-auto w-fit pb-6 text-lg">Sad Panda...</h3>
