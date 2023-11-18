@@ -6,14 +6,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function SearchBar(){
     const [url, setUrl] = useState("");
-    const [score, setScore] = useState("");
-    const [name, setName] = useState("");
+    // const [score, setScore] = useState("");
+    // const [name, setName] = useState("");
     const navigate = useNavigate();
 
     const handleSearch = e =>{
         e.preventDefault()
         if(url != ""){
-            navigate(`/packages?kwarg=${url}`)
+            navigate(`/packages?name=${url}`)
         }else{
             navigate("/packages")
         }

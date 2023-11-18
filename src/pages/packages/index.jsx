@@ -17,7 +17,7 @@ export default function PackagesPage(){
 
     useEffect(()=>{
         dispatch(getAllPackages());
-        dispatch(filterForWord(searchParams.get('kwarg')));
+        dispatch(filterForWord(searchParams.get('name')));
     },[ dispatch, searchParams])
 
 
