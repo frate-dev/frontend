@@ -43,10 +43,10 @@ export default function SearchBar(){
         placeholder="Search Here..."
         value={url}
         onChange={handleChange}
-        className="bg-gray rounded-lg pl-2"
+        className="bg-gray rounded-lg pl-2 w-10/12"
         ></input>
         <button
-        className="pr-2"
+        className="pr-2 w-1/6"
         ><SearchIcon/></button>
         
     </form>)
