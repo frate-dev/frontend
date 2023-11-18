@@ -5,22 +5,21 @@ import queryString from "query-string";
 import { filterForWord, getAllPackages } from "../../store/packages";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSearchParams } from 'react-router-dom';
 
 export default function PackagesPage(){
 
-    const parsed = queryString.parse(location.search);
+    const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
-
+    
     
     const displayedItemsOne =useSelector((state)=>state.packages.displayPackages)
 
     useEffect(()=>{
         dispatch(getAllPackages());
-        dispatch(filterForWord(parsed.kwarg));
-    },[ dispatch, parsed.kwarg])
+        dispatch(filterForWord(searchParams.get('kwarg')));
+    },[ dispatch, searchParams])
 
-    
-//need to force a rerender if there is a change in params
 
     return (
         <div className="w-10/12 h-full mx-auto">

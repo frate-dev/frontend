@@ -10,7 +10,7 @@ import PackagePage from "./pages/package";
 import PackagesPage from "./pages/packages";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   // const dispatch = useDispatch();
   // const packages = useSelector((state) => state.packages.packages);
   // useEffect(() => {
