@@ -10,7 +10,10 @@ export const packageSlice = createSlice({
     initialState,
     reducers:{
         clearState:(state)=>state.packages = [],
-        filterForWord:(state)=>state.displayPackages = state.packages.filter((i, word)=>i.name.includes(word)),
+        filterForWord(state){
+
+            state.displayPackages = state.packages.filter((i)=>i.name.includes(i))
+        },
         filterByStars:(state)=>state.displayPackages = state.packages.filter((i,num)=>i.stars == num),
         // add searches
         //add filters

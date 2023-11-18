@@ -11,12 +11,12 @@ import PackagesPage from "./pages/packages";
 
 function App() {
   const [count, setCount] = useState(0);
-  const dispatch = useDispatch();
-  const packages = useSelector((state) => state.packages.packages);
-  useEffect(() => {
-    dispatch(getAllPackages());
-    // dispatch(filterForWord("7bitconf"))
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // const packages = useSelector((state) => state.packages.packages);
+  // useEffect(() => {
+  //   dispatch(getAllPackages());
+  //   // dispatch(filterForWord("7bitconf"))
+  // }, [dispatch]);
 
   return (
     <>
