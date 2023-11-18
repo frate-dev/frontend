@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "../searchBar";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,8 +17,9 @@ export default function Header() {
           src="https://raw.githubusercontent.com/cmaker-dev/cmaker/6c64104821ca7f9e17583ecf30c7d2ac225a9b58/source/images/cmakerlogo.svg"
           alt="cmakeLogo"
         />
-        {/* <h1 className="h-8 w-20 mt-12 ml-4 text-4xl text-gray">Index</h1> */}
+        
       </div>
+      <SearchBar></SearchBar>
       <button className="mr-20 bg-blue h-10 w-40 mt-12 rounded-md hover:bg-green">
         {" "}
         Submit Package
