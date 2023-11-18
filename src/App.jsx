@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByStars, filterForWord, getAllPackages } from "./store/packages";
 import Header from "./components/header/index";
 import { Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import LandingPage from "./pages/landing";
+import PackagePage from "./pages/package";
+import PackagesPage from "./pages/packages";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,9 +22,9 @@ function App() {
     <>
       <Header></Header>
       <Routes>
-        {/* <Route path="/" />
-        <Route path="/packages" />
-        <Route path="/packages/:package" /> */}
+        <Route path="/" element={<LandingPage></LandingPage>}/>
+        <Route path="/packages" element={<PackagesPage></PackagesPage>}/>
+        <Route path="/packages/:package"element={<PackagePage></PackagePage>}/>
       </Routes>
     </>
   );
