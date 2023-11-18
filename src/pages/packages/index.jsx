@@ -25,9 +25,9 @@ export default function PackagesPage(){
         <div className="w-10/12 h-full mx-auto">
             {
                 displayedItemsOne.length ? (<div>yes</div>):
-                (<div className="mx-auto pt-24">
-                    <h3 className="text-slate mx-auto w-fit pb-6 text-lg">No Packages Found...</h3>
-                    <h3 className="text-slate mx-auto w-fit pb-6 text-lg">Sad Panda...</h3>
+                (<div className="mx-auto pt-24 pb-40 flex-col justify-center">
+                    <h3 className="text-slate mx-auto w-fit mb-10 text-lg">No Packages Found...</h3>
+                    <h3 className="text-slate mx-auto w-fit mb-6 text-lg">Sad Panda...</h3>
                     <img className="mx-auto rounded" src="https://media1.giphy.com/media/7p3e2WCM0VEnm/giphy.gif?cid=ecf05e47li5v9zdago8wibx14hdy8jl7ixqeoa01hv1m5zx8&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="sad panda"/></div>)
             }
             
