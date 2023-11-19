@@ -1,54 +1,61 @@
-import * as React from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import SearchIcon from '@mui/icons-material/Search';
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 
-export default function SearchBar(){
-    const [url, setUrl] = useState("");
-    // const [score, setScore] = useState("");
-    // const [name, setName] = useState("");
-    const navigate = useNavigate();
+export default function SearchBar() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef(null);
+  const typingTimeoutRef = useRef(null);
 
-    const handleSearch = e =>{
-        e.preventDefault()
-        if(url != ""){
-            navigate(`/packages?name=${url}`)
-        }else{
-            navigate("/packages")
-        }
-        setUrl("")
+  useEffect(() => {
+    // Initialize inputValue with query from URL on component mount
+    const queryFromUrl = searchParams.get("query");
+    setInputValue(queryFromUrl || "");
+  }, [searchParams]);
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
     }
+    typingTimeoutRef.current = setTimeout(() => {
+      setSearchParams(e.target.value ? { query: e.target.value } : {});
+    }, 500); // Adjust debounce time as needed
+  };
 
-    // useEffect(()=>{
-    //     if(score != "" && name != ""){
-    //         setUrl(`name=${name}&score=${score}`)
-    //     }else if(score !=""){
-    //         setUrl(`score=${score}`)
-
-    //     }else if(name != ""){
-    //         setUrl(`name=${name}`)
-    //     }
-    // },[url, score, name])
-    const handleChange = e => {
-        e.preventDefault()
-        setUrl(e.target.value)
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
     }
-    return (
-    <form
-    className="mt-12 w-1/2 flex h-10 rounded-lg bg-gray justify-between mr-24"
-    onSubmit={handleSearch}
-    >
+    setSearchParams(inputValue ? { query: inputValue } : {});
+  };
+
+  useEffect(() => {
+    // Focus input when '/' is pressed
+    const handleKeyDown = (event) => {
+      if (event.key === "/" && document.activeElement !== inputRef.current) {
+        event.preventDefault();
+        inputRef.current.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  return (
+    <form className="w-full" onSubmit={handleSearch}>
+      <div className="flex items-center border-1 border-[#A3A3A3] bg-white rounded-lg">
         <input
-        type="text"
-        placeholder="Search Here..."
-        value={url}
-        onChange={handleChange}
-        className="bg-gray rounded-lg pl-2 w-10/12"
-        ></input>
-        <button
-        className="pr-2 w-1/6"
-        ><SearchIcon/></button>
-        
-    </form>)
+          ref={inputRef}
+          type="text"
+          placeholder="Use '/' to focus"
+          value={inputValue}
+          onChange={handleChange}
+          className="w-full py-2 px-4 bg-white text-gray-500 placeholder-[#737373] border border-[#A3A3A3] rounded-lg focus:outline-none focus:border-gray-400"
+        />
+      </div>
+    </form>
+  );
 }

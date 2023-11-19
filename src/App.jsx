@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { filterByStars, filterForWord, getAllPackages } from "./store/packages";
 import Header from "./components/header/index";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -21,13 +17,13 @@ function App() {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <Routes>
-        <Route path="/" element={<LandingPage></LandingPage>}/>
-        <Route path="/packages" element={<PackagesPage></PackagesPage>}/>
-        <Route path="/packages/:package"element={<PackagePage></PackagePage>}/>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/packages" element={<PackagesPage />} />
+        <Route path="/packages/:package" element={<PackagePage />} />
       </Routes>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
