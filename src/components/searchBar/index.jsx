@@ -1,17 +1,20 @@
 import { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { filterForWord } from "../../store/packages";
 
 export default function SearchBar() {
+  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
   const typingTimeoutRef = useRef(null);
 
   useEffect(() => {
-    // Initialize inputValue with query from URL on component mount
     const queryFromUrl = searchParams.get("query");
     setInputValue(queryFromUrl || "");
-  }, [searchParams]);
+    dispatch(filterForWord(queryFromUrl || ""));
+  }, [searchParams, dispatch]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -19,8 +22,9 @@ export default function SearchBar() {
       clearTimeout(typingTimeoutRef.current);
     }
     typingTimeoutRef.current = setTimeout(() => {
+      dispatch(filterForWord(e.target.value)); // Dispatch the filterForWord thunk
       setSearchParams(e.target.value ? { query: e.target.value } : {});
-    }, 500); // Adjust debounce time as needed
+    }, 500);
   };
 
   const handleSearch = (e) => {
@@ -32,7 +36,6 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    // Focus input when '/' is pressed
     const handleKeyDown = (event) => {
       if (event.key === "/" && document.activeElement !== inputRef.current) {
         event.preventDefault();

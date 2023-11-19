@@ -44,22 +44,24 @@ export default function PackagesPage() {
 
   return (
     <div className="w-1/2 h-full mx-auto my-20">
-      {displayedItemsOne.length ? (
-        <div className="flex flex-col items-center">{renderCards()}</div>
-      ) : hasSearched ? (
-        <div className="mx-auto pt-24 pb-40 flex flex-col items-center justify-center">
-          <h3 className="text-gray-700 mx-auto w-fit mb-10 text-lg">
-            No Packages Found...
-          </h3>
-          <h3 className="text-gray-700 mx-auto w-fit mb-6 text-lg">
-            Sad Panda...
-          </h3>
-          <img
-            className="mx-auto rounded"
-            src="https://media1.giphy.com/media/7p3e2WCM0VEnm/giphy.gif?cid=ecf05e47li5v9zdago8wibx14hdy8jl7ixqeoa01hv1m5zx8&rid=giphy.gif&ct=g"
-            alt="sad panda"
-          />
-        </div>
+      {hasSearched ? (
+        displayedItemsOne.length ? (
+          <div className="flex flex-col items-center">{renderCards()}</div>
+        ) : (
+          <div className="mx-auto pt-24 pb-40 flex flex-col items-center justify-center">
+            <h3 className="text-gray-700 mx-auto w-fit mb-10 text-lg">
+              No Packages Found...
+            </h3>
+            <h3 className="text-gray-700 mx-auto w-fit mb-6 text-lg">
+              Sad Panda...
+            </h3>
+            <img
+              className="mx-auto rounded"
+              src="https://media1.giphy.com/media/7p3e2WCM0VEnm/giphy.gif?cid=ecf05e47li5v9zdago8wibx14hdy8jl7ixqeoa01hv1m5zx8&rid=giphy.gif&ct=g"
+              alt="sad panda"
+            />
+          </div>
+        )
       ) : null}
     </div>
   );
