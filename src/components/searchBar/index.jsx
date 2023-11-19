@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { filterForWord } from "../../store/packages";
 
 export default function SearchBar() {
@@ -9,12 +9,19 @@ export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
   const typingTimeoutRef = useRef(null);
+  const navigate = useNavigate();
+
+  const from = searchParams.get("from") || "0";
+  const size = searchParams.get("size") || "50";
 
   useEffect(() => {
     const queryFromUrl = searchParams.get("query");
     setInputValue(queryFromUrl || "");
-    dispatch(filterForWord(queryFromUrl || ""));
-  }, [searchParams, dispatch]);
+    dispatch(filterForWord(queryFromUrl || "", from, size));
+    if (window.location.pathname === "/") {
+      navigate("/packages");
+    }
+  }, [searchParams, dispatch, from, size]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -22,8 +29,12 @@ export default function SearchBar() {
       clearTimeout(typingTimeoutRef.current);
     }
     typingTimeoutRef.current = setTimeout(() => {
-      dispatch(filterForWord(e.target.value)); // Dispatch the filterForWord thunk
-      setSearchParams(e.target.value ? { query: e.target.value } : {});
+      const newSearchParams = new URLSearchParams();
+      if (e.target.value) newSearchParams.set("query", e.target.value);
+      newSearchParams.set("from", from);
+      newSearchParams.set("size", size);
+      setSearchParams(newSearchParams);
+      dispatch(filterForWord(e.target.value, from, size));
     }, 500);
   };
 
@@ -32,7 +43,11 @@ export default function SearchBar() {
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
-    setSearchParams(inputValue ? { query: inputValue } : {});
+    const newSearchParams = new URLSearchParams();
+    if (inputValue) newSearchParams.set("query", inputValue);
+    newSearchParams.set("from", from);
+    newSearchParams.set("size", size);
+    setSearchParams(newSearchParams);
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ const initialState = {
   err: "",
   displayPackages: [],
 };
+
 export const packageSlice = createSlice({
   name: "packages",
   initialState,
@@ -49,22 +50,16 @@ export const packageSlice = createSlice({
 export const getAllPackages = createAsyncThunk(
   "packages/getAllPackages",
   async (_, { rejectWithValue }) => {
-    const res = fetch("../../index.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data;
-      });
-
-    if (!res.ok) {
-      rejectWithValue(await res);
+    try {
+      const response = await fetch("../../index.json");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-    const data = await res;
-
-    return data;
   }
 );
+
 export const filterForWord = createAsyncThunk(
   "filter/filterPackages",
   async (word, { rejectWithValue }) => {
