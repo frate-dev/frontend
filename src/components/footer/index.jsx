@@ -1,3 +1,8 @@
+import React, { useRef } from "react";
+import { useModal } from "../../context/Modal";
+import Modal from "../emailModal";
+import OpenModalButton from "../OpenModalButton";
+
 export default function Footer() {
   return (
     <footer className="bg-grey dark:bg-gray-900 mt-auto">
@@ -39,8 +44,22 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:black">
+                Contact Us
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li>
+                  <OpenModalButton
+                    buttonText="Email Us"
+                    modalComponent={<Modal />}
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       </div>
     </footer>
