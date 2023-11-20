@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPackages, filterForWord } from "../../store/packages";
 import { useSearchParams } from "react-router-dom";
 
 const ITEMS_PER_PAGE_DEFAULT = 50;
+const SORT_OPTIONS = {
+  POPULARITY: "popularity",
+  ALPHABETICAL: "alphabetical",
+};
 
 export default function PackagesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,6 +15,7 @@ export default function PackagesPage() {
   const displayedItems = useSelector(
     (state) => state.packages.displayPackages || []
   );
+  const [sortOrder, setSortOrder] = useState(SORT_OPTIONS.POPULARITY);
 
   const query = searchParams.get("query");
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
@@ -36,10 +41,21 @@ export default function PackagesPage() {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const firstItemIndex = (currentPage - 1) * itemsPerPage;
   const lastItemIndex = firstItemIndex + itemsPerPage;
-  const currentItems = useMemo(
-    () => displayedItems.slice(firstItemIndex, lastItemIndex),
-    [firstItemIndex, lastItemIndex, displayedItems]
-  );
+
+  const sortedItems = useMemo(() => {
+    let sorted = [...displayedItems];
+    if (sortOrder === SORT_OPTIONS.POPULARITY) {
+      sorted.sort((a, b) => b.stars - a.stars);
+    } else if (sortOrder === SORT_OPTIONS.ALPHABETICAL) {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    return sorted;
+  }, [displayedItems, sortOrder]);
+
+  const currentItems = useMemo(() => {
+    const firstItemIndex = (currentPage - 1) * itemsPerPage;
+    return sortedItems.slice(firstItemIndex, firstItemIndex + itemsPerPage);
+  }, [currentPage, itemsPerPage, sortedItems]);
 
   const updatePageParam = useCallback(
     (newPage) => {
@@ -64,6 +80,17 @@ export default function PackagesPage() {
       updatePageParam(currentPage - 1);
     }
   }, [currentPage, updatePageParam]);
+
+  const renderSortDropdown = () => (
+    <select
+      value={sortOrder}
+      onChange={(e) => setSortOrder(e.target.value)}
+      className="border p-2 rounded"
+    >
+      <option value={SORT_OPTIONS.POPULARITY}>Sort by Popularity</option>
+      <option value={SORT_OPTIONS.ALPHABETICAL}>Sort Alphabetically</option>
+    </select>
+  );
 
   const renderCards = useMemo(
     () =>
@@ -90,6 +117,7 @@ export default function PackagesPage() {
     <div className="w-1/2 h-full mx-auto my-20">
       {query && (
         <>
+          <div className="flex justify-start mb-10">{renderSortDropdown()}</div>
           <div className="mb-4">
             Showing results {firstItemIndex + 1}-
             {Math.min(lastItemIndex, totalItems)} of {totalItems} packages for{" "}
