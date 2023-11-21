@@ -77,9 +77,9 @@ export const filterForWord = createAsyncThunk(
     const data = await res;
 
     return data.filter((i) => i.name
-    //.toLowerCase()
+    .toLowerCase()
     .includes(word
-        //.toLowerCase()
+        .toLowerCase()
         ));
   }
 );
