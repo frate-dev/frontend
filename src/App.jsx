@@ -9,8 +9,8 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<PackagesPage />} />
-        <Route path="/:id" element={<SpecificPackage />} />
+        <Route path="/packages" element={<PackagesPage />} />
+        <Route path="/packages/:id" element={<SpecificPackage />} />
       </Routes>
       <Footer />
     </>
