@@ -120,69 +120,36 @@ export default function PackagesPage() {
 
   return (
     <div className="w-1/2 h-full mx-auto my-20">
-      {query ? (
-        <>
-          <div className="flex justify-start mb-10">{renderSortDropdown()}</div>
-          <div className="mb-4">
-            Showing results {firstItemIndex + 1}-
-            {Math.min(lastItemIndex, totalItems)} of {totalItems} packages for{" "}
-            {query}.
+      <>
+        <div className="flex justify-start mb-10">{renderSortDropdown()}</div>
+        <div className="mb-4">
+          Showing results {firstItemIndex + 1}-
+          {Math.min(lastItemIndex, totalItems)} of {totalItems} packages for{" "}
+          {query}.
+        </div>
+        <div className="flex flex-col items-center">{renderCards}</div>
+        {totalItems > itemsPerPage && (
+          <div className="flex justify-between items-center my-4">
+            <button
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+              className="disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+              className="disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
           </div>
-          <div className="flex flex-col items-center">{renderCards}</div>
-          {totalItems > itemsPerPage && (
-            <div className="flex justify-between items-center my-4">
-              <button
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-                className="disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous
-              </button>
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-                className="disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          <div className="flex justify-start mb-10">{renderSortDropdown()}</div>
-          <div className="mb-4">
-            Showing results {firstItemIndex + 1}-
-            {Math.min(lastItemIndex, totalItems)} of {totalItems} packages for{" "}
-            {query}.
-          </div>
-          <div className="flex flex-col items-center">{renderCards}</div>
-          {totalItems > itemsPerPage && (
-            <div className="flex justify-between items-center my-4">
-              <button
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-                className="disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous
-              </button>
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-                className="disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </>
-      )}
+        )}
+      </>
     </div>
   );
 }
