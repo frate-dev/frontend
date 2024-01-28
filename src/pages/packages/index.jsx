@@ -101,7 +101,7 @@ export default function PackagesPage() {
           className="bg-white border border-[#C8C8C8] p-4 mb-4 rounded flex justify-between items-center w-full hover:cursor-pointer"
           onClick={(e) => {
             e.preventDefault;
-            nav(`/packages/${packageItem.name}`);
+            nav(`/${packageItem.name}`);
           }}
         >
           <div className="w-1/2">

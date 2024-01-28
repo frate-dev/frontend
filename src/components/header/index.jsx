@@ -11,7 +11,7 @@ export default function Header() {
         className="w-20 hover:animate-pulse hover:cursor-pointer"
         onClick={(e) => {
           e.preventDefault();
-          nav("/packages");
+          nav("/");
         }}
       ></img>
       <div className="flex-grow px-4 max-w-xl mx-auto">

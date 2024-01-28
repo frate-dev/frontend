@@ -19,7 +19,7 @@ export default function SearchBar() {
     setInputValue(queryFromUrl || "");
     dispatch(filterForWord(queryFromUrl || "", from, size));
     if (window.location.pathname === "/") {
-      navigate("/packages");
+      navigate("/");
     }
   }, [searchParams, dispatch, from, size]);
 
